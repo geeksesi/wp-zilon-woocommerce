@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin name: Zilon.io
+Plugin name: Zilon_io
 Plugin URI: 
 Description: Zilon.io for wordpress 
 Version: v0.1.0
