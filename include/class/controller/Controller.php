@@ -39,11 +39,12 @@ class Controller
     }
 
 
-    private function make_redirect_url(string $_url, string $_payment_id, bool $_true){
-        if(!strpos($_url, "?")){
+    private function make_redirect_url(string $_url, string $_payment_id, bool $_true)
+    {
+        if (!strpos($_url, "?")) {
             $url = $_url."?payment_id=".$_payment_id."&ok=".$_true;
             return $url;
-        }    
+        }
         $url = $_url."&payment_id=".$_payment_id."&ok=".$_true;
         return $url;
     }
@@ -85,9 +86,11 @@ class Controller
 
     public function manage_redirect_url()
     {
-        if(!isset($_GET["payment_id"]) || !isset($_GET["ok"])){
+        if (!isset($_GET["payment_id"]) || !isset($_GET["ok"])) {
             return null;
         }
+        $payment_data = $this->api->payment_info($_GET["payment_id"]);
 
+        $this->view->redirect_page($payment_data);
     }
 }
