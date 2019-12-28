@@ -42,4 +42,14 @@ class Api {
         return false;
 
     }
+
+
+    public function payment_info(string $_payment_id){
+        $url   = "https://api.zilon.io/v1/payments/".$_payment_id;
+        $json  = file_get_contents($url);
+        $array = json_decode($json, true);
+        return $array;
+
+    }
+
 }
