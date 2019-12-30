@@ -4,7 +4,6 @@ class View
 {
     public function redirect_ok_page($_payment_data)
     {
-        error_log("hello");
         echo "
         <link rel=\"stylesheet\" type=\"text/css\" href=\"".ZILONIO_URL.'assets/style.css'."\">
         <div id=\"Zilon\" class=\"p-relative h-100\">
@@ -94,5 +93,31 @@ function onCopyText(inputText, tooltipText) {
 
     public function redirect_fail_page($_payment_data)
     {
+        error_log("WRD");
+        echo "
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"".ZILONIO_URL.'assets/style.css'."\">
+
+        <div id=\"Zilon\"class=\"p-relative h-100\">
+            <div class=\"child-v-h-center card-container\">
+                <div class=\"card\" style=\"height: 100%\">
+                    <div class=\"container column w-100\">
+                        <div>
+                            <img src=\"".ZILONIO_IMG_URL.'exclamation.png'."\"
+                            class=\"mx-auto d-block verified-image\"
+                             width=\"60px\"
+                            height=\"60px\"
+                            alt=\"\">
+                        </div>
+                        <h1 class=\"title title-fail my-0\" style=\"color : #a82323 !important\">Failed transaction</h1>
+                        <p class=\"text my-0\">You are transaction was failed</p>
+                        <div class=\"container row\" style=\"margin-top: 44px;padding-bottom: 35px\">
+                            <span class=\"float-left list-label item-1\">Payment ID</span>
+                            <span class=\"float-right text-right list-text item-2\">".$_payment_data['p_id']."</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        ";
     }
 }
