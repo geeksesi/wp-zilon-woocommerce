@@ -27,9 +27,10 @@ class Api {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $result = curl_exec($ch);
-        $result = json_decode($result, true);
+        $array = json_decode($result, true);
         curl_close ($ch);
-        return (isset($array["link"])) ? (string) $array["link"] : false;
+
+        return (isset($array["data"]["link"])) ? (string) $array["data"]["link"] : false;
     }
 
     public function check_payment(string $_payment_id){
