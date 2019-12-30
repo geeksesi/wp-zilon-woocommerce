@@ -84,13 +84,26 @@ class Controller
         return $output;
     }
 
+
     public function manage_redirect_url()
     {
         if (!isset($_GET["payment_id"]) || !isset($_GET["ok"])) {
+            error_log($_GET["payment_id"]);
             return null;
         }
-        $payment_data = $this->api->payment_info($_GET["payment_id"]);
 
-        $this->view->redirect_page($payment_data);
+        $payment_data = $this->api->payment_info($_GET["payment_id"]);
+        $payment_date["p_id"] = $_GET["payment_id"];
+        if (!$payment_data) {
+            return false;
+        }
+        if ($_GET["ok"]) {
+            WC()->cart->empty_cart();
+        }
+        if ($payment_data["status"] == "confirmed") {
+            $this->view->redirect_ok_page($payment_data);
+        } else {
+            $this->view->redirect_fail_page($payment_data);
+        }
     }
 }
