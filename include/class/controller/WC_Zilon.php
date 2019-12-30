@@ -53,7 +53,6 @@ class WC_Zilon extends WC_Payment_Gateway
     {
         $site_url = get_site_url();
         $string =  $site_url."?rest_route=/zilon/v1/back_url&o_id=".$_order_id."&r_url=".$this->redirect_url;
-        error_log($string);
         return $string;
     }
 

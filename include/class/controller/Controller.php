@@ -88,7 +88,6 @@ class Controller
     public function manage_redirect_url()
     {
         if (!isset($_GET["payment_id"]) || !isset($_GET["ok"])) {
-            error_log($_GET["payment_id"]);
             return null;
         }
 
