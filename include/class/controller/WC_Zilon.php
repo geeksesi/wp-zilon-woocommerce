@@ -42,9 +42,9 @@ class WC_Zilon extends WC_Payment_Gateway
                 'desc_tip'  => __('This is the apiKey provided by zilon.io when you signed up for an account.', 'Zilon_io'),
             ),
             'redirect_url' => array(
-                'title'    => __('address of where u want to user get there after finished pay page', 'Zilon_io'),
+                'title'    => __('put [Zilon_io] shortcode on a page and set here that page address', 'Zilon_io'),
                 'type'    => 'text',
-                'desc_tip'  => __('you must put this shortcut on a page and paste the url here : [Zilon_io]', 'Zilon_io'),
+                'desc_tip'  => __('it\'s your landing page when user\'s payment will done: [Zilon_io]', 'Zilon_io'),
             ),
         );
     }
