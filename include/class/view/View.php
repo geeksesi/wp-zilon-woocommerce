@@ -4,7 +4,10 @@ class View
 {
     public function redirect_ok_page($_payment_data)
     {
+        $time_string = str_replace("T"," ", $_payment_data['confirmedAt']);
+        $time_string = str_replace("Z","", $time_string);
         echo "
+        <script src=\"https://cdn.jsdelivr.net/npm/moment@2.24.0/min/moment-with-locales.min.js\"></script>
         <link rel=\"stylesheet\" type=\"text/css\" href=\"".ZILONIO_URL.'assets/style.css'."\">
         <div id=\"Zilon\" class=\"p-relative h-100\">
             <div class=\"child-v-h-center card-container\">
@@ -23,17 +26,17 @@ class View
                 <li>
                 <div class=\"container row\">
                 <span class=\"float-left list-label item-1\">Payment ID</span>
-                <span class=\"float-right text-right list-text item-2\">".$_payment_data['p_id']."</span>
+                <span class=\"float-right text-right list-text item-2\">".$_payment_data['id']."</span>
                 </div>
                 </li>
                 <li>
                 <div class=\"container row\">
                 <span class=\"float-left list-label item-1\">Tx hash</span>
                 <div class=\"float-right text-right list-text item-2\">
-                <span style=\"font-size:small\">".$_payment_data['txnHash']."</span>
+                <span id=\"hash\" style=\"font-size:small\">".$_payment_data['hash']."</span>
                 <div class=\"tooltip\">
                 <button type=\"button\"
-                onclick=\"onCopyText('".$_payment_data['txnHash']."', 'txTooltip')\"
+                onclick=\"onCopyText('".$_payment_data['hash']."', 'txTooltip')\"
                 onmouseout=\"onHandleTooltip('txTooltip')\"
                 class=\"copy-btn\">
                     <span class=\"tooltiptext\" id=\"txTooltip\">Copy</span>
@@ -46,7 +49,7 @@ class View
                     <li>
                     <div class=\"container row\">
                     <span class=\"float-left list-label item-1\">Confirm At</span>
-                    <span class=\"float-right text-right list-text item-2\">".$_payment_data['confirmedAt']."</span>
+                    <span id=\"time\" class=\"float-right text-right list-text item-2\">".$_payment_data['confirmedAt']."</span>
                     </div>
                     </li>
                     <li>
@@ -67,6 +70,20 @@ class View
                     </div>
                     </div>
 
+        <script>
+
+            
+            function shorter(hash) {
+                var first = hash.slice(0,10);
+                var end   = hash.slice(-10);
+                return  first+\"...\"+end;
+            }
+            var hash_text = document.getElementById(\"hash\").innerHTML;
+            document.getElementById(\"hash\").innerHTML = shorter(hash_text); 
+            var show_time = moment.parseZone('".$time_string."').local().format('YYYY-MM-DD, h:mm:ss a'); 
+            document.getElementById(\"time\").innerHTML = show_time; 
+            console.log(show_time);
+        </script>
                     <script>
 function onCopyText(inputText, tooltipText) {
     var input = document.createElement('input');
