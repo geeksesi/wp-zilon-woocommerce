@@ -39,7 +39,7 @@ class Controller
     }
 
 
-    private function make_redirect_url(string $_url, string $_payment_id, bool $_true)
+    private function make_redirect_url(string $_url, string $_payment_id, string $_true)
     {
         if (!strpos($_url, "?")) {
             $url = $_url."?payment_id=".$_payment_id."&ok=".$_true;
@@ -52,27 +52,28 @@ class Controller
 
     public function manage_back_url()
     {
-        global $woocommerce;
+        
         if (!isset($_GET["o_id"]) || !isset($_GET["r_url"])) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;
             return $output;
         }
-        if (!isset($_POST["paymentId"]) || !isset($_POST["status"])) {
+        $data = json_decode(file_get_contents("php://input"), true);
+        if (!isset($data["paymentId"]) || !isset($data["status"])) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;
             return $output;
         }
-        if ($_POST["status"] != "confirmed") {
+        if ($data["status"] != "confirmed") {
             $output["ok"] = true;
-            $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $_POST["paymentId"], false);
+            $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"], "false");
             return $output;
         }
 
-        $check_payment = $this->api->confirmed($_POST["paymentId"]);
+        $check_payment = $this->api->check_payment($data["paymentId"]);
         if (!$check_payment || $check_payment != "confirmed") {
             $output["ok"] = true;
-            $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $_POST["paymentId"], false);
+            $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"], "false");
             return $output;
         }
 
@@ -80,8 +81,8 @@ class Controller
         $customer_order->payment_complete();
 
         $output["ok"] = true;
-        $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $_POST["paymentId"], true);
-        return $output;
+        $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"], "true");
+        return json_encode($output);
     }
 
 
@@ -92,17 +93,17 @@ class Controller
         }
 
         $payment_data = $this->api->payment_info($_GET["payment_id"]);
-        $payment_date["p_id"] = $_GET["payment_id"];
+        $payment_date["data"]["p_id"] = $_GET["payment_id"];
         if (!$payment_data) {
             return false;
         }
         if ($_GET["ok"]) {
             WC()->cart->empty_cart();
         }
-        if ($payment_data["status"] == "confirmed") {
-            $this->view->redirect_ok_page($payment_data);
+        if ($payment_data["data"]["status"] == "confirmed") {
+            $this->view->redirect_ok_page($payment_data["data"]);
         } else {
-            $this->view->redirect_fail_page($payment_data);
+            $this->view->redirect_fail_page($payment_data["data"]);
         }
     }
 }
