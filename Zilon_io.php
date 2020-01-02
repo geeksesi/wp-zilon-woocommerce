@@ -3,7 +3,7 @@
 Plugin name: Zilon_io
 Plugin URI: 
 Description: Zilon.io for wordpress 
-Version: v1.0
+Version: 1.0
 Author: Zilon 
 Author URI: 
 Text Domain: -e('Zilon.io','Zilon_io')
