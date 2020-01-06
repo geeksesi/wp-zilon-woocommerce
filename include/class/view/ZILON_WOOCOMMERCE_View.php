@@ -20,18 +20,18 @@ class ZILON_WOOCOMMERCE_View
                 height=\"60px\"
                 alt=\"\">
                 </div>
-                <h1 class=\"title my-0\">Successful transaction</h1>
-                <p class=\"text my-0\">You are transaction was successful</p>
+                <h1 class=\"title my-0\">".__("Successful transaction","zilon-woocommerce")."</h1>
+                <p class=\"text my-0\">".__("You are transaction was successful","zilon-woocommerce")."</p>
                 <ul class=\"list\">
                 <li>
                 <div class=\"container row\">
-                <span class=\"float-left list-label item-1\">Payment ID</span>
+                <span class=\"float-left list-label item-1\">".__("Payment ID","zilon-woocommerce")."</span>
                 <span class=\"float-right text-right list-text item-2\">".$_payment_data['id']."</span>
                 </div>
                 </li>
                 <li>
                 <div class=\"container row\">
-                <span class=\"float-left list-label item-1\">Tx hash</span>
+                <span class=\"float-left list-label item-1\">".__("Tx hash","zilon-woocommerce")."</span>
                 <div class=\"float-right text-right list-text item-2\">
                 <span id=\"hash\" style=\"font-size:small\">".$_payment_data['hash']."</span>
                 <div class=\"tooltip\">
@@ -39,7 +39,7 @@ class ZILON_WOOCOMMERCE_View
                 onclick=\"onCopyText('".$_payment_data['hash']."', 'txTooltip')\"
                 onmouseout=\"onHandleTooltip('txTooltip')\"
                 class=\"copy-btn\">
-                    <span class=\"tooltiptext\" id=\"txTooltip\">Copy</span>
+                    <span class=\"tooltiptext\" id=\"txTooltip\">".__("Copy","zilon-woocommerce")."</span>
                     <img src=\"".ZILON_WOOCOMMERCE_IMG_URL.'copy.png'."\" width=\"15px\" height=\"15px\" alt=\"\">
                     </button>
                     </div>
@@ -48,19 +48,19 @@ class ZILON_WOOCOMMERCE_View
                     </li>
                     <li>
                     <div class=\"container row\">
-                    <span class=\"float-left list-label item-1\">Confirm At</span>
+                    <span class=\"float-left list-label item-1\">".__("Confirm At","zilon-woocommerce")."</span>
                     <span id=\"time\" class=\"float-right text-right list-text item-2\">".$_payment_data['confirmedAt']."</span>
                     </div>
                     </li>
                     <li>
                     <div class=\"container row\">
-                    <span class=\"float-left list-label item-1\">Payer name</span>
+                    <span class=\"float-left list-label item-1\">".__("Payer name","zilon-woocommerce")."</span>
                     <span class=\"float-right text-right list-text item-2\">".$_payment_data['payerName']."</span>
                     </div>
                     </li>
                     <li>
                     <div class=\"container row\">
-                    <span class=\"float-left list-label item-1\">Payer email</span>
+                    <span class=\"float-left list-label item-1\">".__("Payer email","zilon-woocommerce")."</span>
                     <span class=\"float-right text-right list-text item-2\">".$_payment_data['payerEmail']."</span>
                     </div>
                     </li>
@@ -124,10 +124,10 @@ function onCopyText(inputText, tooltipText) {
                             height=\"60px\"
                             alt=\"\">
                         </div>
-                        <h1 class=\"title title-fail my-0\" style=\"color : #a82323 !important\">Failed transaction</h1>
-                        <p class=\"text my-0\">You are transaction was failed</p>
+                        <h1 class=\"title title-fail my-0\" style=\"color : #a82323 !important\">".__("Failed transaction","zilon-woocommerce")."</h1>
+                        <p class=\"text my-0\">".__("You are transaction was failed","zilon-woocommerce")."</p>
                         <div class=\"container row\" style=\"margin-top: 44px;padding-bottom: 35px\">
-                            <span class=\"float-left list-label item-1\">Payment ID</span>
+                            <span class=\"float-left list-label item-1\">".__("Payment ID","zilon-woocommerce")."</span>
                             <span class=\"float-right text-right list-text item-2\">".$_payment_data['p_id']."</span>
                         </div>
                     </div>
