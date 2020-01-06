@@ -1,6 +1,6 @@
 <?php
 
-class View
+class ZILON_WOOCOMMERCE_View
 {
     public function redirect_ok_page($_payment_data)
     {
@@ -8,13 +8,13 @@ class View
         $time_string = str_replace("Z","", $time_string);
         echo "
         <script src=\"https://cdn.jsdelivr.net/npm/moment@2.24.0/min/moment-with-locales.min.js\"></script>
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"".ZILONIO_URL.'assets/style.css'."\">
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"".ZILON_WOOCOMMERCE_URL.'assets/style.css'."\">
         <div id=\"Zilon\" class=\"p-relative h-100\">
             <div class=\"child-v-h-center card-container\">
             <div class=\"card\">
             <div class=\"container column w-100\">
             <div>
-            <img src=\"".ZILONIO_IMG_URL.'verified.png'."\"
+            <img src=\"".ZILON_WOOCOMMERCE_IMG_URL.'verified.png'."\"
             class=\"mx-auto d-block verified-image\"
                 width=\"60px\"
                 height=\"60px\"
@@ -40,7 +40,7 @@ class View
                 onmouseout=\"onHandleTooltip('txTooltip')\"
                 class=\"copy-btn\">
                     <span class=\"tooltiptext\" id=\"txTooltip\">Copy</span>
-                    <img src=\"".ZILONIO_IMG_URL.'copy.png'."\" width=\"15px\" height=\"15px\" alt=\"\">
+                    <img src=\"".ZILON_WOOCOMMERCE_IMG_URL.'copy.png'."\" width=\"15px\" height=\"15px\" alt=\"\">
                     </button>
                     </div>
                     </div>
@@ -112,14 +112,14 @@ function onCopyText(inputText, tooltipText) {
     {
         error_log("WRD");
         echo "
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"".ZILONIO_URL.'assets/style.css'."\">
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"".ZILON_WOOCOMMERCE_URL.'assets/style.css'."\">
 
         <div id=\"Zilon\"class=\"p-relative h-100\">
             <div class=\"child-v-h-center card-container\">
                 <div class=\"card\" style=\"height: 100%\">
                     <div class=\"container column w-100\">
                         <div>
-                            <img src=\"".ZILONIO_IMG_URL.'exclamation.png'."\"
+                            <img src=\"".ZILON_WOOCOMMERCE_IMG_URL.'exclamation.png'."\"
                             class=\"mx-auto d-block verified-image\"
                              width=\"60px\"
                             height=\"60px\"

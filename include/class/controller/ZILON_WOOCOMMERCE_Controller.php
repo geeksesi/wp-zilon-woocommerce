@@ -1,16 +1,16 @@
 <?php
 
-include ZILONIO_INC_DIR."class/view/View.php";
-include ZILONIO_INC_DIR."class/controller/Api.php";
+include ZILON_WOOCOMMERCE_INC_DIR."class/view/ZILON_WOOCOMMERCE_View.php";
+include ZILON_WOOCOMMERCE_INC_DIR."class/controller/ZILON_WOOCOMMERCE_Api.php";
 
-class Controller
+class ZILON_WOOCOMMERCE_Controller
 {
     private $view;
     private $api;
     public function __construct()
     {
-        $this->view  = new View();
-        $this->api   = new Api();
+        $this->view  = new ZILON_WOOCOMMERCE_View();
+        $this->api   = new ZILON_WOOCOMMERCE_Api();
         add_filter('woocommerce_payment_gateways', [$this, "zilon_gateway_init"]);
         add_action('plugins_loaded', [$this, 'init']);
         add_action('rest_api_init', [$this, "make_back_url"]);
@@ -26,7 +26,7 @@ class Controller
 
     public function init()
     {
-        include ZILONIO_INC_DIR."class/controller/WC_Zilon.php";
+        include ZILON_WOOCOMMERCE_INC_DIR."class/controller/WC_Zilon.php";
     }
 
 
@@ -52,7 +52,6 @@ class Controller
 
     public function manage_back_url()
     {
-        
         if (!isset($_GET["o_id"]) || !isset($_GET["r_url"])) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;

@@ -1,26 +1,26 @@
 <?php
 /*
-Plugin name: Zilon_io
-Plugin URI: 
+Plugin name: zilon_woocommerce
+Plugin URI: https://gitlab.com/zilon/zilon-woocommerce-plugin
 Description: Zilon.io for wordpress 
 Version: 1.0
 Author: Zilon 
-Author URI: 
-Text Domain: -e('Zilon.io','Zilon_io')
+Author URI: https://zilon.io
+Text Domain: -e('Zilon woocommerce','zilon_woocommerce')
  */
 defined('ABSPATH') || exit('No Direct Access.');
-define('ZILONIO_DIR', plugin_dir_path(__FILE__));
-define('ZILONIO_URL', plugin_dir_url(__FILE__));
-define('ZILONIO_IMG_URL', trailingslashit(ZILONIO_URL.'assets/img'));
-define('ZILONIO_INC_DIR', trailingslashit(ZILONIO_DIR.'include'));
-define('ZILONIO_VERSION', "1.0.0");
+define('ZILON_WOOCOMMERCE_DIR', plugin_dir_path(__FILE__));
+define('ZILON_WOOCOMMERCE_URL', plugin_dir_url(__FILE__));
+define('ZILON_WOOCOMMERCE_IMG_URL', trailingslashit(ZILON_WOOCOMMERCE_URL.'assets/img'));
+define('ZILON_WOOCOMMERCE_INC_DIR', trailingslashit(ZILON_WOOCOMMERCE_DIR.'include'));
+define('ZILON_WOOCOMMERCE_VERSION', "1.0.0");
 
 
-require_once ZILONIO_INC_DIR.'class/controller/Controller.php';
-$zilon = new ZilonController();
+include ZILON_WOOCOMMERCE_INC_DIR.'class/controller/ZILON_WOOCOMMERCE_Controller.php';
+$zilon = new ZILON_WOOCOMMERCE_Controller();
 
-add_action('plugins_loaded', 'ZILONIO_textdomain');
-function ZILONIO_textdomain() {
-	load_plugin_textdomain( 'Zilon_io', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+add_action('plugins_loaded', 'ZILON_WOOCOMMERCE_textdomain');
+function ZILON_WOOCOMMERCE_textdomain() {
+	load_plugin_textdomain( 'zilon_woocommerce', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
 }
 
