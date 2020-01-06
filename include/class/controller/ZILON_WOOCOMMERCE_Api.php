@@ -40,8 +40,8 @@ class ZILON_WOOCOMMERCE_Api
         $url   = "https://api.zilon.io/v1/payments/".$_payment_id;
         $json  = file_get_contents($url);
         $array = json_decode($json, true);
-        if (isset($array["status"])) {
-            return (string)$array["status"];
+        if (isset($array["data"]["status"])) {
+            return (string)$array["data"]["status"];
         }
         return false;
     }
