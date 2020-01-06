@@ -5,11 +5,11 @@ class WC_Zilon extends WC_Payment_Gateway
     public function __construct()
     {
         $this->id = "zilon_payment_gateway";
-        $this->method_title = __("zilon payment", 'Zilon_io');
-        $this->method_description = __("Zilon.io for wordpress", 'Zilon_io');
-        $this->title = __("Zilon.io WC", 'Zilon_io');
-        $this->description = __("Successfully payment through zilon.io.", 'Zilon_io');
-        $this->icon = ZILONIO_IMG_URL."logo.png";
+        $this->method_title = __("zilon payment", 'zilon-woocommerce');
+        $this->method_description = __("Zilon for wordpress", 'zilon-woocommerce');
+        $this->title = __("Zilon", 'zilon-woocommerce');
+        $this->description = __("Successfully payment through zilon.io.", 'zilon-woocommerce');
+        $this->icon = ZILON_WOOCOMMERCE_IMG_URL."logo.png";
         $this->has_fields = true;
         $this->init_form_fields();
         $this->init_settings();
@@ -31,20 +31,20 @@ class WC_Zilon extends WC_Payment_Gateway
     {
         $this->form_fields = array(
             'enabled' => array(
-                'title'    => __('Enable / Disable', 'Zilon_io'),
-                'label'    => __('Enable this payment gateway', 'Zilon_io'),
+                'title'    => __('Enable / Disable', 'zilon-woocommerce'),
+                'label'    => __('Enable this payment gateway', 'zilon-woocommerce'),
                 'type'    => 'checkbox',
                 'default'  => 'no',
             ),
             'api_key' => array(
-                'title'    => __('apiKey of zilon.io', 'Zilon_io'),
+                'title'    => __('apiKey of zilon.io', 'zilon-woocommerce'),
                 'type'    => 'text',
-                'desc_tip'  => __('This is the apiKey provided by zilon.io when you signed up for an account.', 'Zilon_io'),
+                'desc_tip'  => __('This is the apiKey provided by zilon.io when you signed up for an account.', 'zilon-woocommerce'),
             ),
             'redirect_url' => array(
-                'title'    => __('put [Zilon_io] shortcode on a page and set here that page address', 'Zilon_io'),
+                'title'    => __('put [zilon-woocommerce] shortcode on a page and set here that page address', 'zilon-woocommerce'),
                 'type'    => 'text',
-                'desc_tip'  => __('it\'s your landing page when user\'s payment will done: [Zilon_io]', 'Zilon_io'),
+                'desc_tip'  => __('it\'s your landing page when user\'s payment will done: [zilon-woocommerce]', 'zilon-woocommerce'),
             ),
         );
     }
@@ -61,7 +61,7 @@ class WC_Zilon extends WC_Payment_Gateway
     public function process_payment($_order_id)
     {
         $customer_order = new WC_Order($_order_id);
-        $api = new Api();
+        $api = new ZILON_WOOCOMMERCE_Api();
         $url = $api->create_payment(
             (string) $this->api_key,
             (string) $customer_order->get_total(),
