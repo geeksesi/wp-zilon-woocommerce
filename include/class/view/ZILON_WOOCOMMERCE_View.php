@@ -110,7 +110,6 @@ function onCopyText(inputText, tooltipText) {
 
     public function redirect_fail_page($_payment_data)
     {
-        error_log("WRD");
         echo "
         <link rel=\"stylesheet\" type=\"text/css\" href=\"".ZILON_WOOCOMMERCE_URL.'assets/style.css'."\">
 
