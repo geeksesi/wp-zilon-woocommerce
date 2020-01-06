@@ -59,18 +59,18 @@ class Controller
             return $output;
         }
         $data = json_decode(file_get_contents("php://input"), true);
-        if (!isset($data["paymentId"]) || !isset($data["status"])) {
+        if (!isset($data["data"]["paymentId"]) || !isset($data["data"]["status"])) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;
             return $output;
         }
-        if ($data["status"] != "confirmed") {
+        if ($data["data"]["status"] != "confirmed") {
             $output["ok"] = true;
             $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"], "false");
             return $output;
         }
 
-        $check_payment = $this->api->check_payment($data["paymentId"]);
+        $check_payment = $this->api->check_payment($data["data"]["paymentId"]);
         if (!$check_payment || $check_payment != "confirmed") {
             $output["ok"] = true;
             $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"], "false");

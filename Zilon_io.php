@@ -13,11 +13,11 @@ define('ZILONIO_DIR', plugin_dir_path(__FILE__));
 define('ZILONIO_URL', plugin_dir_url(__FILE__));
 define('ZILONIO_IMG_URL', trailingslashit(ZILONIO_URL.'assets/img'));
 define('ZILONIO_INC_DIR', trailingslashit(ZILONIO_DIR.'include'));
-define('ZILONIO_VERSION', "0.1.0");
+define('ZILONIO_VERSION', "1.0.0");
 
 
-include ZILONIO_INC_DIR.'class/controller/Controller.php';
-$zilon = new Controller();
+require_once ZILONIO_INC_DIR.'class/controller/Controller.php';
+$zilon = new ZilonController();
 
 add_action('plugins_loaded', 'ZILONIO_textdomain');
 function ZILONIO_textdomain() {
