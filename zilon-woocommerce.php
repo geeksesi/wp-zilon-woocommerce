@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin name: zilon_woocommerce
+Plugin name: zilon-woocommerce
 Plugin URI: https://gitlab.com/zilon/zilon-woocommerce-plugin
-Description: Zilon.io for wordpress 
+Description: Zilon.io for woocommerce 
 Version: 1.0
 Author: Zilon 
 Author URI: https://zilon.io
-Text Domain: -e('Zilon woocommerce','zilon_woocommerce')
+Text Domain: -e('Zilon woocommerce','zilon-woocommerce')
  */
 defined('ABSPATH') || exit('No Direct Access.');
 define('ZILON_WOOCOMMERCE_DIR', plugin_dir_path(__FILE__));
@@ -21,6 +21,6 @@ $zilon = new ZILON_WOOCOMMERCE_Controller();
 
 add_action('plugins_loaded', 'ZILON_WOOCOMMERCE_textdomain');
 function ZILON_WOOCOMMERCE_textdomain() {
-	load_plugin_textdomain( 'zilon_woocommerce', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+	load_plugin_textdomain( 'zilon-woocommerce', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
 }
 
