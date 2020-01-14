@@ -6,8 +6,15 @@ class ZILON_WOOCOMMERCE_Api
     {
     }
 
-    public function create_payment(string $_api_key, string $_amount, string $_currency, string $_back_url, string $_name = null, string $_email = null)
+    public function create_payment($_api_key, $_amount, $_currency, $_back_url, $_name = null, $_email = null)
     {
+        if (!isset($_api_key) || !isset($_amount) || !isset($_currency) || !isset($_back_url)) {
+            return false;
+        }
+
+        if (!is_string($_api_key) || !is_string($_amount) || !is_string($_currency) || !is_string($_back_url)) {
+            return false;
+        }
         $url = "https://api.zilon.io/v1/payments";
         $data = [
             "email"     => $_email,
@@ -18,37 +25,46 @@ class ZILON_WOOCOMMERCE_Api
             "apiKey"   => $_api_key,
         ];
 
+        $result = wp_remote_post($url, [
+            'body'    => wp_json_encode($data),
+            'headers' => ['Content-Type' => 'application/json']
+        ]);
 
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $result = curl_exec($ch);
-        $array = json_decode($result, true);
-        curl_close($ch);
+        $array = json_decode($result["body"], true);
 
         return (isset($array["data"]["link"])) ? (string) $array["data"]["link"] : false;
     }
 
-    public function check_payment(string $_payment_id)
+
+    public function check_payment( $_payment_id)
     {
+        if (!isset($_payment_id)) {
+            return false;
+        }
+
+        if (!is_string($_payment_id)) {
+            return false;
+        }
         $url   = "https://api.zilon.io/v1/payments/".$_payment_id;
         $json  = file_get_contents($url);
         $array = json_decode($json, true);
-        if (isset($array["data"]["status"])) {
-            return (string)$array["data"]["status"];
+        if (is_array($array) && isset($array["data"]) && isset($array["data"]["status"])) {
+            return (string) $array["data"]["status"];
         }
         return false;
     }
 
 
-    public function payment_info(string $_payment_id)
+
+    public function payment_info($_payment_id)
     {
+        if (!isset($_payment_id)) {
+            return false;
+        }
+
+        if (!is_string($_payment_id)) {
+            return false;
+        }
         $url   = "https://api.zilon.io/v1/payments/".$_payment_id;
         $json  = file_get_contents($url);
         $array = json_decode($json, true);
