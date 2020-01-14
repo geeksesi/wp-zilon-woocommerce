@@ -59,6 +59,7 @@ class ZILON_WOOCOMMERCE_View
     public function redirect_styles()
     {
         wp_enqueue_style('ZILON_WOOCOMMERCE_redirect_style', ZILON_WOOCOMMERCE_URL.'assets/style.css');
+        wp_enqueue_style('ZILON_WOOCOMMERCE_roboto_google_font', 'https://fonts.googleapis.com/css?family=Roboto&display=swap');
     }
 
 
