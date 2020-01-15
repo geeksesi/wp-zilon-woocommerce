@@ -67,7 +67,7 @@ class WC_Zilon extends WC_Payment_Gateway
             (string) $customer_order->get_total(),
             (string) $customer_order->get_currency(),
             (string) $this->make_back_url($_order_id),
-            (string) $customer_order->get_billing_first_name(),
+            (string) $customer_order->get_billing_first_name() .' '.$customer_order->get_billing_last_name(),
             (string) $customer_order->get_billing_email()
         );
 
@@ -79,15 +79,5 @@ class WC_Zilon extends WC_Payment_Gateway
                 'redirect' => $url,
             ];
         }
-    }
-
-    public function validate_fields()
-    {
-        return true;
-    }
-
-    public function get_api_key()
-    {
-        return $this->api_key;
     }
 }
