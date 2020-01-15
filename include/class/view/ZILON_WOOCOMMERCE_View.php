@@ -50,7 +50,7 @@ class ZILON_WOOCOMMERCE_View
 
 
         $inline_script = $hash_handle_script ."\n". $_time_handle_script ."\n". $copy_handle_script;
-        wp_enqueue_script('ZILON_WOOCOMMERCE_moment_js', 'https://cdn.jsdelivr.net/npm/moment@2.24.0/min/moment-with-locales.min.js', array(), '2.24.0');
+        wp_enqueue_script('ZILON_WOOCOMMERCE_moment_js', ZILON_WOOCOMMERCE_URL.'assets/moment-with-locales.min.js', array(), '2.24.0');
         wp_add_inline_script('ZILON_WOOCOMMERCE_moment_js', $inline_script);
     }
 
