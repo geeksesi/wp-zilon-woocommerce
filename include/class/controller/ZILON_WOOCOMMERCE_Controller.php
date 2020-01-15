@@ -111,7 +111,7 @@ class ZILON_WOOCOMMERCE_Controller
         }
 
         $payment_data = $this->api->payment_info($_GET["payment_id"]);
-        $payment_date["data"]["p_id"] = $_GET["payment_id"];
+        $payment_data["data"]["p_id"] = $_GET["payment_id"];
         if (!$payment_data) {
             return false;
         }
