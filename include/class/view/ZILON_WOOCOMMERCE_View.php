@@ -65,6 +65,12 @@ class ZILON_WOOCOMMERCE_View
 
     public function redirect_ok_page($_payment_data)
     {
+        if (!isset($_payment_data) || !is_array($_payment_data)) {
+            return false;
+        }
+        if (!isset($_payment_data["p_id"]) || !isset($_payment_data["confirmedAt"]) || !isset($_payment_data["id"]) || !isset($_payment_data["hash"]) || !isset($_payment_data["payerName"]) || !isset($_payment_data["payerEmail"])) {
+            return false;
+        }
         add_action('wp_enqueue_scripts', [$this, 'redirect_styles']);
         $time_string = str_replace("T", " ", $_payment_data['confirmedAt']);
         $time_string = str_replace("Z", "", $time_string);
@@ -133,6 +139,12 @@ class ZILON_WOOCOMMERCE_View
 
     public function redirect_fail_page($_payment_data)
     {
+        if (!isset($_payment_data) || !is_array($_payment_data)) {
+            return false;
+        }
+        if (!isset($_payment_data["p_id"])) {
+            return false;
+        }
         add_action('wp_enqueue_scripts', [$this, 'redirect_styles']);
 
         echo "
