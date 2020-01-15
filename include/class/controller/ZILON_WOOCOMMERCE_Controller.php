@@ -39,8 +39,18 @@ class ZILON_WOOCOMMERCE_Controller
     }
 
 
-    private function make_redirect_url(string $_url, string $_payment_id, string $_true)
+    private function make_redirect_url($_url, $_payment_id, $_true)
     {
+        if (!isset($_url) || !isset($_payment_id) || !isset($_true)) {
+            $output["ok"] = false;
+            $output["redirectUrl"] = null;
+            return $output;
+        }
+        if (!is_string($_url) || !is_string($_payment_id) || !is_string($_true)) {
+            $output["ok"] = false;
+            $output["redirectUrl"] = null;
+            return $output;
+        }
         if (!strpos($_url, "?")) {
             $url = $_url."?payment_id=".$_payment_id."&ok=".$_true;
             return $url;
@@ -53,6 +63,11 @@ class ZILON_WOOCOMMERCE_Controller
     public function manage_back_url()
     {
         if (!isset($_GET["o_id"]) || !isset($_GET["r_url"])) {
+            $output["ok"] = false;
+            $output["redirectUrl"] = null;
+            return $output;
+        }
+        if (!is_string($_GET["o_id"]) || !is_string($_GET["r_url"])) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;
             return $output;
@@ -94,6 +109,7 @@ class ZILON_WOOCOMMERCE_Controller
         if (!is_string($_GET["payment_id"]) || !is_bool($_GET["ok"])) {
             return false;
         }
+
         $payment_data = $this->api->payment_info($_GET["payment_id"]);
         $payment_date["data"]["p_id"] = $_GET["payment_id"];
         if (!$payment_data) {
