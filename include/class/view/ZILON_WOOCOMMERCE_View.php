@@ -2,8 +2,11 @@
 
 class ZILON_WOOCOMMERCE_View
 {
-    private $time_string;
 
+    public function __construct(){
+        add_action('wp_enqueue_scripts', [$this, 'redirect_styles']);
+        add_action('wp_enqueue_scripts', [$this, 'redirect_scripts']);
+    }
     public function redirect_scripts()
     {
         $copy_handle_script = "
@@ -43,14 +46,15 @@ class ZILON_WOOCOMMERCE_View
         
         $time_handle_script = "
 
-            var show_time = moment.parseZone('".$this->time_string."').local().format('YYYY-MM-DD, h:mm:ss a'); 
+            var time = document.getElementById(\"time\").innerHTML;
+            var show_time = moment.parseZone(time).local().format('YYYY-MM-DD, h:mm:ss a'); 
             document.getElementById(\"time\").innerHTML = show_time; 
 
         ";
 
 
         $inline_script = $hash_handle_script ."\n". $time_handle_script ."\n". $copy_handle_script;
-        wp_enqueue_script('ZILON_WOOCOMMERCE_moment_js', ZILON_WOOCOMMERCE_URL.'assets/moment-with-locales.min.js', array(), '2.24.0');
+        wp_register_script('ZILON_WOOCOMMERCE_moment_js', ZILON_WOOCOMMERCE_URL.'assets/moment-with-locales.min.js', array(), '2.24.0');
         wp_add_inline_script('ZILON_WOOCOMMERCE_moment_js', $inline_script);
     }
 
@@ -58,8 +62,8 @@ class ZILON_WOOCOMMERCE_View
 
     public function redirect_styles()
     {
-        wp_enqueue_style('ZILON_WOOCOMMERCE_redirect_style', ZILON_WOOCOMMERCE_URL.'assets/style.css');
-        wp_enqueue_style('ZILON_WOOCOMMERCE_roboto_google_font', 'https://fonts.googleapis.com/css?family=Roboto&display=swap');
+        wp_register_style('ZILON_WOOCOMMERCE_redirect_style', ZILON_WOOCOMMERCE_URL.'assets/style.css');
+        wp_register_style('ZILON_WOOCOMMERCE_roboto_google_font', 'https://fonts.googleapis.com/css?family=Roboto&display=swap');
     }
 
 
@@ -71,10 +75,10 @@ class ZILON_WOOCOMMERCE_View
         if (!isset($_payment_data["p_id"]) || !isset($_payment_data["confirmedAt"]) || !isset($_payment_data["id"]) || !isset($_payment_data["hash"]) || !isset($_payment_data["payerName"]) || !isset($_payment_data["payerEmail"])) {
             return false;
         }
-        add_action('wp_enqueue_scripts', [$this, 'redirect_styles']);
+        wp_enqueue_style( 'ZILON_WOOCOMMERCE_redirect_style' );
+        wp_enqueue_style( 'ZILON_WOOCOMMERCE_roboto_google_font' );
         $time_string = str_replace("T", " ", $_payment_data['confirmedAt']);
         $time_string = str_replace("Z", "", $time_string);
-        $this->time_string = $time_string;
         echo "
         <div id=\"Zilon\" class=\"p-relative h-100\">
             <div class=\"child-v-h-center card-container\">
@@ -109,7 +113,7 @@ class ZILON_WOOCOMMERCE_View
                             <li>
                                 <div class=\"container row\">
                                     <span class=\"float-left list-label item-1\">".__("Confirm At", "zilon-woocommerce")."</span>
-                                    <span id=\"time\" class=\"float-right text-right list-text item-2\">".$_payment_data['confirmedAt']."</span>
+                                    <span id=\"time\" class=\"float-right text-right list-text item-2\">".$time_string."</span>
                                 </div>
                             </li>
                             <li>
@@ -132,8 +136,7 @@ class ZILON_WOOCOMMERCE_View
 
     ";
 
-
-        add_action('wp_enqueue_scripts', [$this, 'redirect_scripts']);
+        wp_enqueue_script('ZILON_WOOCOMMERCE_moment_js');
     }
 
 
@@ -145,7 +148,8 @@ class ZILON_WOOCOMMERCE_View
         if (!isset($_payment_data["p_id"])) {
             return false;
         }
-        add_action('wp_enqueue_scripts', [$this, 'redirect_styles']);
+        wp_enqueue_style( 'ZILON_WOOCOMMERCE_redirect_style' );
+        wp_enqueue_style( 'ZILON_WOOCOMMERCE_roboto_google_font' );
 
         echo "
 
