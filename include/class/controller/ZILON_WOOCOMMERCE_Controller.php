@@ -65,38 +65,37 @@ class ZILON_WOOCOMMERCE_Controller
         if (!isset($_GET["o_id"]) || !isset($_GET["r_url"])) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;
-            return $output;
+            echo json_encode($output);
+            return null;
         }
         if (!is_string($_GET["o_id"]) || !is_string($_GET["r_url"])) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;
-            return $output;
+            echo json_encode($output);
+            return null;
         }
         $data = json_decode(file_get_contents("php://input"), true);
         if (!isset($data["paymentId"]) || !isset($data["status"])) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;
-            return $output;
+            echo json_encode($output);
+            return null;
         }
+        $output["ok"] = true;
+        $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"]);
+        echo json_encode($output);
         if ($data["status"] != "confirmed") {
-            $output["ok"] = true;
-            $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"], "false");
-            return $output;
+            return null;
         }
 
         $check_payment = $this->api->check_payment($data["paymentId"]);
         if (!$check_payment || $check_payment != "confirmed") {
-            $output["ok"] = true;
-            $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"], "false");
-            return $output;
+            return null;
         }
 
         $customer_order = new WC_Order($_GET["o_id"]);
         $customer_order->payment_complete();
-
-        $output["ok"] = true;
-        $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"], "true");
-        return json_encode($output);
+        return null;
     }
 
 
