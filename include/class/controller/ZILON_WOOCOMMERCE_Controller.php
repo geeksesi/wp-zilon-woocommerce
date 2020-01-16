@@ -60,6 +60,12 @@ class ZILON_WOOCOMMERCE_Controller
     }
 
 
+    /**
+     * this function will manage a wordpress rest api route to answer Zilon.io backUrl
+     * Method : POST (include a query string)
+     * @return null :: but will echo json of user request.
+     *
+     */
     public function manage_back_url()
     {
         if (!isset($_GET["o_id"]) || !isset($_GET["r_url"])) {
@@ -82,7 +88,7 @@ class ZILON_WOOCOMMERCE_Controller
             return null;
         }
         $output["ok"] = true;
-        $output["redirectUrl"] = $this->make_redirect_url($_GET["r_url"], $data["paymentId"]);
+        $output["redirectUrl"] = esc_url($this->make_redirect_url($_GET["r_url"], $data["paymentId"]));
         echo json_encode($output);
         if ($data["status"] != "confirmed") {
             return null;
@@ -105,7 +111,7 @@ class ZILON_WOOCOMMERCE_Controller
             return null;
         }
 
-        if (!is_string($_GET["payment_id"]) || !is_bool($_GET["ok"])) {
+        if (!is_string($_GET["payment_id"]) || !is_string($_GET["ok"])) {
             return false;
         }
 
