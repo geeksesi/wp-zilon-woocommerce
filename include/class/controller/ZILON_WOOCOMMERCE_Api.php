@@ -32,7 +32,7 @@ class ZILON_WOOCOMMERCE_Api
 
         $array = json_decode($result["body"], true);
 
-        return (isset($array["data"]["link"])) ? (string) $array["data"]["link"] : false;
+        return (isset($array["data"]["link"])) ? (string) esc_url_raw($array["data"]["link"]) : false;
     }
 
 
@@ -49,7 +49,7 @@ class ZILON_WOOCOMMERCE_Api
         $json  = file_get_contents($url);
         $array = json_decode($json, true);
         if (is_array($array) && isset($array["data"]) && isset($array["data"]["status"])) {
-            return (string) $array["data"]["status"];
+            return (string) sanitize_text_field($array["data"]["status"]);
         }
         return false;
     }
