@@ -93,16 +93,16 @@ class ZILON_WOOCOMMERCE_View
                             <li>
                                 <div class=\"container row\">
                                     <span class=\"float-left list-label item-1\">".__("Payment ID", "zilon-woocommerce")."</span>
-                                    <span class=\"float-right text-right list-text item-2\">".$_payment_data['id']."</span>
+                                    <span class=\"float-right text-right list-text item-2\">".esc_html($_payment_data['id'])."</span>
                                 </div>
                             </li>
                             <li>
                                 <div class=\"container row\">
                                     <span class=\"float-left list-label item-1\">".__("Tx hash", "zilon-woocommerce")."</span>
                                     <div class=\"float-right text-right list-text item-2\">
-                                        <span id=\"hash\" style=\"font-size:small\">".$_payment_data['hash']."</span>
+                                        <span id=\"hash\" style=\"font-size:small\">".esc_html($_payment_data['hash'])."</span>
                                         <div class=\"tooltip\">
-                                            <button type=\"button\" onclick=\"onCopyText('".$_payment_data['hash']."', 'txTooltip')\" onmouseout=\"onHandleTooltip('txTooltip')\" class=\"copy-btn\">
+                                            <button type=\"button\" onclick=\"onCopyText('".esc_html($_payment_data['hash'])."', 'txTooltip')\" onmouseout=\"onHandleTooltip('txTooltip')\" class=\"copy-btn\">
                                                 <span class=\"tooltiptext\" id=\"txTooltip\">".__("Copy", "zilon-woocommerce")."</span>
                                                 <img src=\"".ZILON_WOOCOMMERCE_IMG_URL.'copy.png'."\" width=\"15px\" height=\"15px\" alt=\"\">
                                             </button>
@@ -113,19 +113,19 @@ class ZILON_WOOCOMMERCE_View
                             <li>
                                 <div class=\"container row\">
                                     <span class=\"float-left list-label item-1\">".__("Confirm At", "zilon-woocommerce")."</span>
-                                    <span id=\"time\" class=\"float-right text-right list-text item-2\">".$time_string."</span>
+                                    <span id=\"time\" class=\"float-right text-right list-text item-2\">".esc_html($time_string)."</span>
                                 </div>
                             </li>
                             <li>
                                 <div class=\"container row\">
                                     <span class=\"float-left list-label item-1\">".__("Payer name", "zilon-woocommerce")."</span>
-                                    <span class=\"float-right text-right list-text item-2\">".$_payment_data['payerName']."</span>
+                                    <span class=\"float-right text-right list-text item-2\">".esc_html($_payment_data['payerName'])."</span>
                                 </div>
                             </li>
                             <li>
                                 <div class=\"container row\">
                                     <span class=\"float-left list-label item-1\">".__("Payer email", "zilon-woocommerce")."</span>
-                                    <span class=\"float-right text-right list-text item-2\">".$_payment_data['payerEmail']."</span>
+                                    <span class=\"float-right text-right list-text item-2\">".esc_html($_payment_data['payerEmail'])."</span>
                                 </div>
                             </li>
                         </ul>
@@ -168,7 +168,7 @@ class ZILON_WOOCOMMERCE_View
                         <p class=\"text my-0\">".__("You are transaction was failed", "zilon-woocommerce")."</p>
                         <div class=\"container row\" style=\"margin-top: 44px;padding-bottom: 35px\">
                             <span class=\"float-left list-label item-1\">".__("Payment ID", "zilon-woocommerce")."</span>
-                            <span class=\"float-right text-right list-text item-2\">".$_payment_data['p_id']."</span>
+                            <span class=\"float-right text-right list-text item-2\">".esc_html($_payment_data['p_id'])."</span>
                         </div>
                     </div>
                 </div>
