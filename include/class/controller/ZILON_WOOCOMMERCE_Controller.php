@@ -39,23 +39,23 @@ class ZILON_WOOCOMMERCE_Controller
     }
 
 
-    private function make_redirect_url($_url, $_payment_id, $_true)
+    private function make_redirect_url($_url, $_payment_id)
     {
-        if (!isset($_url) || !isset($_payment_id) || !isset($_true)) {
+        if (!isset($_url) || !isset($_payment_id)) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;
             return $output;
         }
-        if (!is_string($_url) || !is_string($_payment_id) || !is_string($_true)) {
+        if (!is_string($_url) || !is_string($_payment_id)) {
             $output["ok"] = false;
             $output["redirectUrl"] = null;
             return $output;
         }
         if (!strpos($_url, "?")) {
-            $url = $_url."?payment_id=".$_payment_id."&ok=".$_true;
+            $url = $_url."?payment_id=".$_payment_id."";
             return $url;
         }
-        $url = $_url."&payment_id=".$_payment_id."&ok=".$_true;
+        $url = $_url."&payment_id=".$_payment_id."";
         return $url;
     }
 
@@ -65,7 +65,7 @@ class ZILON_WOOCOMMERCE_Controller
      * Method : POST (include a query string)
      * @return null :: but will echo json of user request.
      *
-     */
+    **/
     public function manage_back_url()
     {
         if (!isset($_GET["o_id"]) || !isset($_GET["r_url"])) {
