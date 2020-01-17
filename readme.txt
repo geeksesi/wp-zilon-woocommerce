@@ -44,3 +44,9 @@ Features include:
 = 1.0 =
 * born zilon woocommerce.
 
+
+== ThiredParty usage ==
+
+* moment.js (MIT licese)
+* roboto google font (apache v2 licese)
+* zilon.io api (this plugin is a client of zilon.io)
