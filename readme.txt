@@ -35,8 +35,10 @@ Features include:
 == Screenshots ==
 
 1. Preview of zilon payment setting page
-2. Priview of zilon payment alongside of other payments in order checkout
-3. preview zilon payment page
+2. Preview of how should put [zilon-woocommerce]
+3. Priview of zilon payment alongside of other payments in order checkout
+4. Preview zilon payment page
+5. Preview of succesfull payment page (where u will put [zilon-woocommerce])
 
 
 == Changelog ==
