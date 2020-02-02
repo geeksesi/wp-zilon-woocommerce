@@ -29,6 +29,9 @@ class WP_ZILON_WOOCOMMERCE_Api
             'body'    => wp_json_encode($data),
             'headers' => ['Content-Type' => 'application/json']
         ]);
+        if (is_wp_error($result)) {
+            return false;
+        }
 
         $array = json_decode($result["body"], true);
 
@@ -36,7 +39,7 @@ class WP_ZILON_WOOCOMMERCE_Api
     }
 
 
-    public function check_payment( $_payment_id)
+    public function check_payment($_payment_id)
     {
         if (!isset($_payment_id)) {
             return false;
@@ -46,8 +49,11 @@ class WP_ZILON_WOOCOMMERCE_Api
             return false;
         }
         $url   = "https://api.zilon.io/v1/payments/".$_payment_id;
-        $json  = file_get_contents($url);
-        $array = json_decode($json, true);
+        $result  = wp_remote_get($url);
+        if (is_wp_error($result)) {
+            return false;
+        }
+        $array = json_decode($result['body'], true);
         if (is_array($array) && isset($array["data"]) && isset($array["data"]["status"])) {
             return (string) sanitize_text_field($array["data"]["status"]);
         }
@@ -66,8 +72,15 @@ class WP_ZILON_WOOCOMMERCE_Api
             return false;
         }
         $url   = "https://api.zilon.io/v1/payments/".$_payment_id;
-        $json  = file_get_contents($url);
-        $array = json_decode($json, true);
-        return $array;
+        $result  = wp_remote_get($url);
+        if (is_wp_error($result)) {
+            return false;
+        }
+        $array = json_decode($result['body'], true);
+        if (is_array($array)) {
+            return $array;
+        } else {
+            return false;
+        }
     }
 }
