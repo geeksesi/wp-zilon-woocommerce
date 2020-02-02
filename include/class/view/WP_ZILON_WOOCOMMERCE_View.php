@@ -1,6 +1,6 @@
 <?php
 
-class ZILON_WOOCOMMERCE_View
+class WP_ZILON_WOOCOMMERCE_View
 {
 
     public function __construct(){
@@ -54,16 +54,16 @@ class ZILON_WOOCOMMERCE_View
 
 
         $inline_script = $hash_handle_script ."\n". $time_handle_script ."\n". $copy_handle_script;
-        wp_register_script('ZILON_WOOCOMMERCE_moment_js', ZILON_WOOCOMMERCE_URL.'assets/moment-with-locales.min.js', array(), '2.24.0');
-        wp_add_inline_script('ZILON_WOOCOMMERCE_moment_js', $inline_script);
+        wp_register_script('WP_ZILON_WOOCOMMERCE_moment_js', WP_ZILON_WOOCOMMERCE_URL.'assets/moment-with-locales.min.js', array(), '2.24.0');
+        wp_add_inline_script('WP_ZILON_WOOCOMMERCE_moment_js', $inline_script);
     }
 
 
 
     public function redirect_styles()
     {
-        wp_register_style('ZILON_WOOCOMMERCE_redirect_style', ZILON_WOOCOMMERCE_URL.'assets/style.css');
-        wp_register_style('ZILON_WOOCOMMERCE_roboto_google_font', 'https://fonts.googleapis.com/css?family=Roboto&display=swap');
+        wp_register_style('WP_ZILON_WOOCOMMERCE_redirect_style', WP_ZILON_WOOCOMMERCE_URL.'assets/style.css');
+        wp_register_style('WP_ZILON_WOOCOMMERCE_roboto_google_font', 'https://fonts.googleapis.com/css?family=Roboto&display=swap');
     }
 
 
@@ -75,8 +75,8 @@ class ZILON_WOOCOMMERCE_View
         if (!isset($_payment_data["p_id"]) || !isset($_payment_data["confirmedAt"]) || !isset($_payment_data["id"]) || !isset($_payment_data["hash"]) || !isset($_payment_data["payerName"]) || !isset($_payment_data["payerEmail"])) {
             return false;
         }
-        wp_enqueue_style( 'ZILON_WOOCOMMERCE_redirect_style' );
-        wp_enqueue_style( 'ZILON_WOOCOMMERCE_roboto_google_font' );
+        wp_enqueue_style( 'WP_ZILON_WOOCOMMERCE_redirect_style' );
+        wp_enqueue_style( 'WP_ZILON_WOOCOMMERCE_roboto_google_font' );
         $time_string = str_replace("T", " ", $_payment_data['confirmedAt']);
         $time_string = str_replace("Z", "", $time_string);
         echo "
@@ -85,26 +85,26 @@ class ZILON_WOOCOMMERCE_View
                 <div class=\"card\">
                     <div class=\"container column w-100\">
                         <div>
-                            <img src=\"".ZILON_WOOCOMMERCE_IMG_URL.'verified.png'."\" class=\"mx-auto d-block verified-image\" width=\"60px\" height=\"60px\" alt=\"\">
+                            <img src=\"".WP_ZILON_WOOCOMMERCE_IMG_URL.'verified.png'."\" class=\"mx-auto d-block verified-image\" width=\"60px\" height=\"60px\" alt=\"\">
                         </div>
-                        <h1 class=\"title my-0\">".__("Successful transaction", "zilon-woocommerce")."</h1>
-                        <p class=\"text my-0\">".__("You are transaction was successful", "zilon-woocommerce")."</p>
+                        <h1 class=\"title my-0\">".__("Successful transaction", "wp-zilon-woocommerce")."</h1>
+                        <p class=\"text my-0\">".__("You are transaction was successful", "wp-zilon-woocommerce")."</p>
                         <ul class=\"list\">
                             <li>
                                 <div class=\"container row\">
-                                    <span class=\"float-left list-label item-1\">".__("Payment ID", "zilon-woocommerce")."</span>
+                                    <span class=\"float-left list-label item-1\">".__("Payment ID", "wp-zilon-woocommerce")."</span>
                                     <span class=\"float-right text-right list-text item-2\">".esc_html($_payment_data['id'])."</span>
                                 </div>
                             </li>
                             <li>
                                 <div class=\"container row\">
-                                    <span class=\"float-left list-label item-1\">".__("Tx hash", "zilon-woocommerce")."</span>
+                                    <span class=\"float-left list-label item-1\">".__("Tx hash", "wp-zilon-woocommerce")."</span>
                                     <div class=\"float-right text-right list-text item-2\">
                                         <span id=\"hash\" style=\"font-size:small\">".esc_html($_payment_data['hash'])."</span>
                                         <div class=\"tooltip\">
                                             <button type=\"button\" onclick=\"onCopyText('".esc_html($_payment_data['hash'])."', 'txTooltip')\" onmouseout=\"onHandleTooltip('txTooltip')\" class=\"copy-btn\">
-                                                <span class=\"tooltiptext\" id=\"txTooltip\">".__("Copy", "zilon-woocommerce")."</span>
-                                                <img src=\"".ZILON_WOOCOMMERCE_IMG_URL.'copy.png'."\" width=\"15px\" height=\"15px\" alt=\"\">
+                                                <span class=\"tooltiptext\" id=\"txTooltip\">".__("Copy", "wp-zilon-woocommerce")."</span>
+                                                <img src=\"".WP_ZILON_WOOCOMMERCE_IMG_URL.'copy.png'."\" width=\"15px\" height=\"15px\" alt=\"\">
                                             </button>
                                         </div>
                                     </div>
@@ -112,19 +112,19 @@ class ZILON_WOOCOMMERCE_View
                             </li>
                             <li>
                                 <div class=\"container row\">
-                                    <span class=\"float-left list-label item-1\">".__("Confirm At", "zilon-woocommerce")."</span>
+                                    <span class=\"float-left list-label item-1\">".__("Confirm At", "wp-zilon-woocommerce")."</span>
                                     <span id=\"time\" class=\"float-right text-right list-text item-2\">".esc_html($time_string)."</span>
                                 </div>
                             </li>
                             <li>
                                 <div class=\"container row\">
-                                    <span class=\"float-left list-label item-1\">".__("Payer name", "zilon-woocommerce")."</span>
+                                    <span class=\"float-left list-label item-1\">".__("Payer name", "wp-zilon-woocommerce")."</span>
                                     <span class=\"float-right text-right list-text item-2\">".esc_html($_payment_data['payerName'])."</span>
                                 </div>
                             </li>
                             <li>
                                 <div class=\"container row\">
-                                    <span class=\"float-left list-label item-1\">".__("Payer email", "zilon-woocommerce")."</span>
+                                    <span class=\"float-left list-label item-1\">".__("Payer email", "wp-zilon-woocommerce")."</span>
                                     <span class=\"float-right text-right list-text item-2\">".esc_html($_payment_data['payerEmail'])."</span>
                                 </div>
                             </li>
@@ -136,7 +136,7 @@ class ZILON_WOOCOMMERCE_View
 
     ";
 
-        wp_enqueue_script('ZILON_WOOCOMMERCE_moment_js');
+        wp_enqueue_script('WP_ZILON_WOOCOMMERCE_moment_js');
     }
 
 
@@ -148,8 +148,8 @@ class ZILON_WOOCOMMERCE_View
         if (!isset($_payment_data["p_id"])) {
             return false;
         }
-        wp_enqueue_style( 'ZILON_WOOCOMMERCE_redirect_style' );
-        wp_enqueue_style( 'ZILON_WOOCOMMERCE_roboto_google_font' );
+        wp_enqueue_style( 'WP_ZILON_WOOCOMMERCE_redirect_style' );
+        wp_enqueue_style( 'WP_ZILON_WOOCOMMERCE_roboto_google_font' );
 
         echo "
 
@@ -158,16 +158,16 @@ class ZILON_WOOCOMMERCE_View
                 <div class=\"card\" style=\"height: 100%\">
                     <div class=\"container column w-100\">
                         <div>
-                            <img src=\"".ZILON_WOOCOMMERCE_IMG_URL.'exclamation.png'."\"
+                            <img src=\"".WP_ZILON_WOOCOMMERCE_IMG_URL.'exclamation.png'."\"
                             class=\"mx-auto d-block verified-image\"
                              width=\"60px\"
                             height=\"60px\"
                             alt=\"\">
                         </div>
-                        <h1 class=\"title title-fail my-0\" style=\"color : #a82323 !important\">".__("Failed transaction", "zilon-woocommerce")."</h1>
-                        <p class=\"text my-0\">".__("You are transaction was failed", "zilon-woocommerce")."</p>
+                        <h1 class=\"title title-fail my-0\" style=\"color : #a82323 !important\">".__("Failed transaction", "wp-zilon-woocommerce")."</h1>
+                        <p class=\"text my-0\">".__("You are transaction was failed", "wp-zilon-woocommerce")."</p>
                         <div class=\"container row\" style=\"margin-top: 44px;padding-bottom: 35px\">
-                            <span class=\"float-left list-label item-1\">".__("Payment ID", "zilon-woocommerce")."</span>
+                            <span class=\"float-left list-label item-1\">".__("Payment ID", "wp-zilon-woocommerce")."</span>
                             <span class=\"float-right text-right list-text item-2\">".esc_html($_payment_data['p_id'])."</span>
                         </div>
                     </div>

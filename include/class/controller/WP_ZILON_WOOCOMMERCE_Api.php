@@ -1,6 +1,6 @@
 <?php
 
-class ZILON_WOOCOMMERCE_Api
+class WP_ZILON_WOOCOMMERCE_Api
 {
     public function __construct()
     {

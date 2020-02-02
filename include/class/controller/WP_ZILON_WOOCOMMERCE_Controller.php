@@ -1,20 +1,20 @@
 <?php
 
-include ZILON_WOOCOMMERCE_INC_DIR."class/view/ZILON_WOOCOMMERCE_View.php";
-include ZILON_WOOCOMMERCE_INC_DIR."class/controller/ZILON_WOOCOMMERCE_Api.php";
+include WP_ZILON_WOOCOMMERCE_INC_DIR."class/view/WP_ZILON_WOOCOMMERCE_View.php";
+include WP_ZILON_WOOCOMMERCE_INC_DIR."class/controller/WP_ZILON_WOOCOMMERCE_Api.php";
 
-class ZILON_WOOCOMMERCE_Controller
+class WP_ZILON_WOOCOMMERCE_Controller
 {
     private $view;
     private $api;
     public function __construct()
     {
-        $this->view  = new ZILON_WOOCOMMERCE_View();
-        $this->api   = new ZILON_WOOCOMMERCE_Api();
+        $this->view  = new WP_ZILON_WOOCOMMERCE_View();
+        $this->api   = new WP_ZILON_WOOCOMMERCE_Api();
         add_filter('woocommerce_payment_gateways', [$this, "zilon_gateway_init"]);
         add_action('plugins_loaded', [$this, 'init']);
         add_action('rest_api_init', [$this, "make_back_url"]);
-        add_shortcode('zilon-woocommerce', [$this, "manage_redirect_url"]);
+        add_shortcode('wp-zilon-woocommerce', [$this, "manage_redirect_url"]);
     }
 
 
@@ -26,7 +26,7 @@ class ZILON_WOOCOMMERCE_Controller
 
     public function init()
     {
-        include ZILON_WOOCOMMERCE_INC_DIR."class/controller/WC_Zilon.php";
+        include WP_ZILON_WOOCOMMERCE_INC_DIR."class/controller/WC_Zilon.php";
     }
 
 
