@@ -5,7 +5,7 @@ Plugin URI: https://gitlab.com/zilon/zilon-woocommerce-plugin
 Description: Zilon.io for woocommerce 
 Version: 1.0.0
 Author: mohammad javad ghasemy 
-Author URI: https://geeksesi.ir
+Author URI: 
 Text Domain: -e('wp zilon woocommerce','wp-zilon-woocommerce')
  */
 defined('ABSPATH') || exit('No Direct Access.');
